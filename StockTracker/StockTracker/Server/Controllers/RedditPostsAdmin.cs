@@ -13,9 +13,13 @@ namespace StockTracker.Server.Controllers
     public class RedditPostsAdmin : ControllerBase
     {
         [HttpPost]
-        public string PostReditPosts(RedditPostModel [] postsArray)
+        public async Task PostReditPosts(List<RedditPostModel> postsList)
         {
-            return "hi";
+            string signature = Request.Headers["Igalito-Signature"];
+            //get all the posts where postsList.Contains(i.postID)
+            //if it exists update values if it doesnt, add
+            //save changes Async
+            return;
         }
     }
 }
