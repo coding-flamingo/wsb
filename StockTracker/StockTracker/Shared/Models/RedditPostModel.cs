@@ -12,7 +12,6 @@ namespace StockTracker.Shared.Models
     {
         [JsonPropertyName("stock")]
         public string stock { get; set; }
-        [Key]
         [JsonPropertyName("postID")]
         public string postID { get; set; }
         [JsonPropertyName("postURL")]
@@ -23,5 +22,7 @@ namespace StockTracker.Shared.Models
         public int downs { get; set; }
         [JsonPropertyName("numComments")]
         public int numComments { get; set; }
+        [JsonPropertyName("LastModified")]
+        public DateTime LastModified { get; set; } = DateTime.UtcNow;
     }
 }

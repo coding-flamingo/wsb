@@ -24,5 +24,11 @@ namespace StockTracker.Server.Data
                 .GetAccessTokenAsync("https://database.windows.net/")
                 .Result;
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RedditPostModel>()
+                .HasKey(o => new { o.postID, o.stock });
+        }
     }
 }

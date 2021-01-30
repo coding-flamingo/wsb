@@ -85,4 +85,4 @@ class SubredditScraper:
 
 
 if __name__ == '__main__':
-    SubredditScraper('wallstreetbets', lim=5, sort='hot').get_posts()
+    SubredditScraper('wallstreetbets', lim=200, sort='hot').get_posts()

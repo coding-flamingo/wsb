@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockTracker.Server.Data;
 
 namespace StockTracker.Server.Migrations
 {
     [DbContext(typeof(WSBDBContext))]
-    partial class WSBDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210130181204_addedDateTime")]
+    partial class addedDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,9 +24,6 @@ namespace StockTracker.Server.Migrations
             modelBuilder.Entity("StockTracker.Shared.Models.RedditPostModel", b =>
                 {
                     b.Property<string>("postID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("stock")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("LastModified")
@@ -39,10 +38,13 @@ namespace StockTracker.Server.Migrations
                     b.Property<string>("postURL")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("stock")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ups")
                         .HasColumnType("int");
 
-                    b.HasKey("postID", "stock");
+                    b.HasKey("postID");
 
                     b.ToTable("Posts");
                 });
