@@ -1,7 +1,41 @@
 ﻿@page "/"
+@inject HttpClient Http
+@inject NavigationManager _navigationManager 
+@using System.Linq
+<h1>Pupular WSB Stocks</h1>
 
-<h1>Hello, world!</h1>
+@if (popularStocks == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" Style="margin-bottom: 20px" />
+}
+else
+{
+    <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" AllowPaging="true" PageSize="20"
+                AllowSorting="true" Data="@popularStocks" TItem="TickerAggregateModel" ColumnWidth="200px">
+        <Columns>
+            <RadzenGridColumn TItem="TickerAggregateModel" Property="StockTicker" Title="Stock" />
+            <RadzenGridColumn TItem="TickerAggregateModel" Property="UpVotes" Title="Up Votes" />
+            <RadzenGridColumn TItem="TickerAggregateModel" Property="Comments" Title="Number of Comments" />
+            <RadzenGridColumn TItem="TickerAggregateModel" Title="View Details" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center">
+                <Template Context="ticker">
+                    <button @onclick="(e => ViewStockDetails(ticker.StockTicker))" type="button" class="btn btn-primary">View Posts</button>
+                </Template>
+            </RadzenGridColumn>
+        </Columns>
+    </RadzenGrid>
+}
 
-Welcome to your new app.
+@code {
+    private List<TickerAggregateModel> popularStocks;
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    protected override async Task OnInitializedAsync()
+    {
+        popularStocks = (await Http.GetFromJsonAsync<List<TickerAggregateModel>>("api/ReadPosts/GetPupularStocks")).OrderByDescending(i => i.UpVotes).ToList();
+    }
+
+    protected void ViewStockDetails(string stock)
+    {
+        _navigationManager.NavigateTo("stockDetails/" + stock);
+    }
+
+}
