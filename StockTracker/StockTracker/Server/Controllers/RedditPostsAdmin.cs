@@ -15,7 +15,7 @@ namespace StockTracker.Server.Controllers
         [HttpPost]
         public async Task PostReditPosts(List<RedditPostModel> postsList)
         {
-            string signature = Request.Headers["Igalito-Signature"];
+            string signature = Request.Headers["Flamingo-Signature"];
             //get all the posts where postsList.Contains(i.postID)
             //if it exists update values if it doesnt, add
             //save changes Async

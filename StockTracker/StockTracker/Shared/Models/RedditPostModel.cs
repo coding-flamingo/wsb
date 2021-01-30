@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -11,6 +12,7 @@ namespace StockTracker.Shared.Models
     {
         [JsonPropertyName("stock")]
         public string stock { get; set; }
+        [Key]
         [JsonPropertyName("postID")]
         public string postID { get; set; }
         [JsonPropertyName("postURL")]

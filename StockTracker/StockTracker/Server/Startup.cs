@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.OpenApi.Models;
+using StockTracker.Server.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace StockTracker.Server
 {
@@ -26,6 +28,8 @@ namespace StockTracker.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddDbContext<WSBDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLDBConnection"),
+                providerOptions => providerOptions.EnableRetryOnFailure()));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StockTracker", Version = "v1" });
