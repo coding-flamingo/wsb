@@ -2,7 +2,7 @@
 @inject HttpClient Http
 @inject NavigationManager _navigationManager 
 @using System.Linq
-<h1>Pupular WSB Stocks</h1>
+<h1>Popular WSB Stocks</h1>
 
 @if (popularStocks == null)
 {
@@ -10,6 +10,7 @@
 }
 else
 {
+    <p>This Site helps you get them Chicken Tendies by crawling WSBs and adding up the upvotes of the posts where a specific stock ticker is mentioned and displays them in the table below.</p>
     <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" AllowPaging="true" PageSize="20"
                 AllowSorting="true" Data="@popularStocks" TItem="TickerAggregateModel" ColumnWidth="200px">
         <Columns>

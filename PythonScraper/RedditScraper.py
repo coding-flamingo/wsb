@@ -53,7 +53,7 @@ class SubredditScraper:
         with open('tickers.csv', mode='r') as infile:
             reader = csv.reader(infile)
             for row in reader:
-                stockTickers[row[0]] = {}
+                stockTickers[row[0].split(',')[0]] = {}
         """Get unique posts from a specified subreddit."""
 
         # Attempt to specify a sorting method.
@@ -77,10 +77,10 @@ class SubredditScraper:
         print(json_object)  
 
 
-        headers = {'Content-type':'application/json', 'Accept':'application/json', 'Flamingo-Signature': "golaaaaa" }
+        headers = {'Content-type':'application/json', 'Accept':'application/json', 'Flamingo-Signature': "" }
         r = requests.post("https://localhost:44360/api/RedditPostsAdmin", data=json_object,  verify=False, headers=headers)
         print(r.status_code)
-        
+        print(r.text)
 
 
 
