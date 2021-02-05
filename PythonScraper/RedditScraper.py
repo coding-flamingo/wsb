@@ -78,7 +78,7 @@ class SubredditScraper:
 
 
         headers = {'Content-type':'application/json', 'Accept':'application/json', 'Flamingo-Signature': "" }
-        r = requests.post("https://localhost:44360/api/RedditPostsAdmin", data=json_object,  verify=False, headers=headers)
+        r = requests.post("https://wsbstonks.azurewebsites.net/api/RedditPostsAdmin", data=json_object,  headers=headers)
         print(r.status_code)
         print(r.text)
 
